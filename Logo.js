@@ -1,5 +1,8 @@
 const fs 				= require('fs')
 
+
+
+
 class Logo {
 	/**
 	 * [constructor description]
