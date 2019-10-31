@@ -1,0 +1,42 @@
+d'accompagnement, m, s
+d'agrément, m, s
+d'asile, m, s
+d'assimilation, f, s
+d'authentification, f, s
+de demande, f, s
+de dérogation, f, s
+de l'autorité, f, s
+de l'enregistrement, m, s
+de l'immigration, f, s
+de la citoyenneté, f, s
+de la coopération, f, s
+de la frontière, f, s
+de la géopolitique, f, s
+de la politique, f, s
+de la viabilité, f, s
+de police, f, s
+de protection, f, s
+des affaires, f, p
+des apatrides, m, p
+des cartes, f, p
+des cas, m, p
+des certificats, m, s
+des copies, f, p
+des demandes, f, p
+des exilés, m, p
+des numéros d'enregistrement, m, p
+des papiers, m, p
+des passeports Nansens, m, p
+des passeports, m, p
+des renseignements, m, p
+des récépissés, m, p
+des réfugiés, m, p
+des sans-papiers, m, p
+des visas, m, p
+du droit civil, m, s
+du franchissement, m, s
+du laissez-passer, m, s
+du renouvellement, m, s
+du récit, m, s
+du service, m, s
+du système, m, s
