@@ -1,11 +1,15 @@
 {
-  "name": "generateur_acronymes",
+  "name": "hear-2019-des-papiers",
   "version": "1.0.0",
-  "description": "",
-  "main": "gen.js",
+  "description": "Workshop des papiers, festival visions d'exil",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^1.20.0"
+  }
 }

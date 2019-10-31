@@ -1,0 +1,76 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" xml:space="preserve">
+<style type="text/css">
+					
+					.contour0{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.09;
+						fill-opacity:0.09;
+						transform:translate(0px, 0px);
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour1{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.04;
+						fill-opacity:0.04;
+						transform:translate(0px, 0px);
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour2{	
+						fill:black;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.24;
+						fill-opacity:0.24;
+						transform:translate(0px, 0px);
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour3{	
+						fill:black;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.15;
+						fill-opacity:0.15;
+						transform:translate(0px, 0px);
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour4{	
+						fill:black;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.13;
+						fill-opacity:0.13;
+						transform:translate(0px, 0px);
+					}
+
+					</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 25px);
+				}
+
+			</style>
+<circle class="contour0" cx="49.5" cy="56.5" r="41"/>
+<circle class="contour1" cx="49.5" cy="56.5" r="27"/>
+<circle class="contour2" cx="49.5" cy="56.5" r="41"/>
+<circle class="contour3" cx="49.5" cy="56.5" r="12"/>
+<circle class="contour4" cx="49.5" cy="56.5" r="26"/>
+<defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Work+Sans&amp;display=swap');</style></defs><text class="mytext" x="0" y="20" font-family="Work Sans" font-size="20px" fill="black"  text-anchor="start">CPDCM</text>
+<text class="mytext" x="0" y="40" font-family="Work Sans" font-size="20px" fill="black" text-anchor="start" >Collectivité provisioire du droit civil ministriel</text>
+</svg>
