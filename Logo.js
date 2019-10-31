@@ -103,8 +103,7 @@ class Logo {
 	 */
 	generateCentered(){
 		this.nbrShape = this.randomNumberShape(5)
-		centré
-		console.log( "", this.nbrShape )
+		console.log( "centré", this.nbrShape )
 
 		let svg = ``
 
