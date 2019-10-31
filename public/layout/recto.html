@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0">
+		<title>Machine Aubette Flyer</title>
+		<link rel="stylesheet" href="fonts/roboto/stylesheet.css">
+		<link rel="stylesheet" href="fonts/vandoesburg/stylesheet.css">
+		<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body class="ruler recto">
+	<div id="fond">
+
+		<div id="texte1">RECTO Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ducimus nostrum harum, mollitia, ratione facilis delectus nesciunt neque doloremque aliquid repellat. Voluptatem autem repudiandae possimus dolorem nemo ad eveniet eum!</div>
+		<div id="texte2">texte 2</div>
+		<div id="texte3">texte 3</div>
+
+		
+
+		<img src="" id="img1">  
+		<img src="" id="img2">
+		<img src="" id="img3">
+			
+		<div id="heure">
+			<span id="hh">00</span><span class="sep">:</span><span id="mm">00</span><span class="sep">:</span><span id="ss">00</span>
+		</div>
+
+	</div>
+
+
+
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script>
+		
+		$(document).ready(function(){
+
+			console.log("des papiers READY");
+
+			// var params = getSearchParamaters();
+
+			// $("#texte1").text( decodeURIComponent(params.texte1 ) );
+			// $("#texte2").text( decodeURIComponent(params.texte2 ) );
+			// $("#texte3").text( decodeURIComponent(params.texte3 ) );
+
+			// $("#img1").attr("src", "images/"+params.image1 );
+			// $("#img2").attr("src", "images/"+params.image2 );
+			// $("#img3").attr("src", "images/"+params.image3 );
+
+
+
+			// placementImage("#img1");
+			// placementImage("#img2");
+			// placementImage("#img3");
+
+			// var nrbImages = Math.round( Math.random() * 2 ) + 1;
+
+
+			// placementTexte("#texte1", 0.5, 39);
+			// placementTexte("#texte2", 0.5, 10);
+			// placementTexte("#texte3", 0.5, 5);
+
+
+			// var horaire = new Date();
+
+			// console.log( horaire.getHours() + ":" + horaire.getMinutes() + ":" + horaire.getSeconds());
+
+
+			// $("#hh").text( ("00" + horaire.getHours() ).substr(-2)  );
+			// $("#mm").text( ("00" + horaire.getMinutes() ).substr(-2) );
+			// $("#ss").text( ("00" + horaire.getSeconds() ).substr(-2) );
+
+
+			// placementHoraire();
+
+		})
+
+
+		function getSearchParamaters(){
+			var prmstr = window.location.search.substr(1);
+			return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+		}
+
+		function transformToAssocArray(prmstr){
+			var params = {};
+			var prmarr = prmstr.split("&");
+			for( var i = 0; i < prmarr.length; i++){
+				var tmparr = prmarr[i].split("=");
+				params[ tmparr[0] ] = tmparr[1];
+			}
+
+			return params;
+		}
+
+
+		function placementImage(id){
+
+			var diagonale = Math.round( Math.random() * (20-7) ) + 7;
+			largeur = Math.sqrt( diagonale * diagonale / 2 );
+			var angle 	= Math.floor( Math.random() * 4 ) * 90 + 45;
+			var posX  	= Math.round( Math.random() * (20 + diagonale) ) - diagonale/2 + (diagonale%2 == 0 ? 0 : -0.5);
+			var posY	= Math.round( Math.random() * (20 + diagonale) ) - diagonale/2 + (diagonale%2 == 0 ? 0 : -0.5);
+
+			$(id)
+			.width(largeur + "cm")
+			.height(largeur + "cm")
+			.css("margin-left", -largeur/2+ "cm")
+			.css("margin-top", -largeur/2+ "cm")
+			.css("transform", "rotate("+angle+"deg)")
+			.css("top", posX + "cm")
+			.css("left", posY + "cm");
+
+		}
+
+		function placementTexte(id, min, max){
+
+			var largeur = Math.round( Math.random() * (20-7) ) + 7;
+			var angle 	= Math.floor( Math.random() * 4 ) * 90 + 45;
+			var posX  	= Math.round( Math.random() * 18) + 1;
+			var posY	= Math.round( Math.random() * 18) + 1;
+
+			var fontSize = Math.round( Math.random() * max )/2 + min;
+
+			console.log(fontSize);
+			// var lineHeight = 
+
+			$(id)
+			.width(largeur + "cm")
+			.css("transform", "rotate("+angle+"deg)")
+			.css("top", posX + "cm")
+			.css("left", posY + "cm")
+			.css("font-size", fontSize + "rem");
+
+		}
+
+
+		function placementHoraire(){
+			var fontSize = Math.round( Math.random() * 6 )/2 +3;
+			var posX  	 = Math.round( Math.random() * (20 - fontSize) ) + fontSize;
+
+
+			$("#heure")
+			.css("left", posX + "cm")
+			.css("font-size", fontSize + "rem");
+
+			var largeur = $("#heure").outerWidth(true);
+
+			var posY = Math.round( Math.random() * ( $("#fond").height() - largeur) );
+
+			console.log(largeur);
+
+			$("#heure").css("top", posY);
+		}
+
+
+	</script>
+
+ 
+ </body>
+</html>
