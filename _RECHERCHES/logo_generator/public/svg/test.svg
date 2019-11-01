@@ -1,0 +1,68 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" 
+		xml:space="preserve">
+<style type="text/css">
+						.contour0{	
+							fill:none;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.16;
+							fill-opacity:0.16;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(226.33391456839624deg); 
+						}
+						</style>
+<style type="text/css">
+					
+					.contour1{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.33;
+						stroke-width:1px; 
+						fill-opacity:0.33;
+						transform:translate(49.5px, 56.5px);
+					}
+
+					</style>
+<style type="text/css">
+						.contour2{	
+							fill:none;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.28;
+							fill-opacity:0.28;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(278.7284832544164deg); 
+						}
+						</style>
+<style type="text/css">
+					
+					.contour3{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.28;
+						stroke-width:1px; 
+						fill-opacity:0.28;
+						transform:translate(49.5px, 56.5px);
+					}
+
+					</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 35px);
+				}
+
+			</style>
+<rect class="contour0" x="33.647528588114604" y="21.00917611974815" width="69" height="69"/>
+<circle class="contour1" cx="9.938372931091337" cy="9.6477688404268" r="30"/>
+<rect class="contour2" x="40.36067716401097" y="32.21130529625393" width="63" height="63"/>
+<circle class="contour3" cx="4.730301170993041" cy="-7.979646815107642" r="17"/>
+<defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');</style></defs><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');</style></defs><text class="mytext" x="-10" y="20" font-family="Noto Serif" font-size="30px" fill="black"  text-anchor="start">AV</text>
+<text class="mytext" x="-10" y="25" font-family="Noto Serif" font-size="7px" fill="black" text-anchor="start" ><tspan x="-10" dy="1.2em">Asile</tspan><tspan x="-10" dy="1.2em">validé</tspan></text>
+</svg>

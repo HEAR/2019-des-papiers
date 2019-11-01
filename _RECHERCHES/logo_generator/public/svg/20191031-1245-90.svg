@@ -1,0 +1,55 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" 
+		xml:space="preserve">
+<style type="text/css">
+						.contour0{	
+							fill:none;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.03;
+							fill-opacity:0.03;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(51.402890922603746deg); 
+						}
+						</style>
+<style type="text/css">
+						.contour1{	
+							fill:black;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.21;
+							fill-opacity:0.21;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(171.46382277603198deg); 
+						}
+						</style>
+<style type="text/css">
+					
+					.contour2{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:1;
+						stroke-width:4px; 
+						fill-opacity:[object Object];
+						transform-origin:center center;
+						transform:translate(-50px, -130px) rotate(16.805257485108136deg) scale(0.25);
+						
+					}
+
+					</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 35px);
+				}
+
+			</style>
+<rect class="contour0" x="48.636020544306895" y="44.14205232159786" width="27" height="27"/>
+<rect class="contour1" x="34.64535479264465" y="13.38896363581117" width="67" height="67"/>
+<polygon class="contour2" points="100.578,55.396 0.553,300.184 100.578,242.099 200.579,300.184"/><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');</style></defs><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&amp;display=swap');</style></defs><text class="mytext" x="-10" y="20" font-family="Black Ops One" font-size="30px" fill="black"  text-anchor="start">CR</text>
+<text class="mytext" x="-10" y="25" font-family="Noto Serif" font-size="7px" fill="black" text-anchor="start" ><tspan x="-10" dy="1.2em">Citoyens</tspan><tspan x="-10" dy="1.2em">reconnus</tspan></text>
+</svg>

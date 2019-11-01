@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+
+	<div>
+		
+	</div>
+
+	<script src="js/jquery.js"></script>
+	<script>
+		
+		$.ajax({
+			url:"svg/test.svg",
+			success:function(data){
+				console.log(data)
+
+				var parser = new DOMParser();
+				var newNode = parser.parseFromString(data, "text/html");
+
+
+				$("div").html( newNode )
+			}
+		})
+
+	</script>
+
+</body>
+</html>

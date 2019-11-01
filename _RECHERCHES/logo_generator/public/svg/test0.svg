@@ -1,0 +1,40 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" 
+		xml:space="preserve">
+<style type="text/css">
+					
+					.contour0{	
+						fill:black;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.39;
+						stroke-width:2px; 
+						fill-opacity:0.39;
+						transform:translate(49.5px, 56.5px);
+					}
+
+					</style>
+<style type="text/css">
+						.contour1{	
+							fill:black;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.01;
+							fill-opacity:0.01;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(233.9985727524005deg); 
+						}
+						</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 35px);
+				}
+
+			</style>
+<circle class="contour0" cx="9.998266016546545" cy="-5.807228381658152" r="16"/>
+<rect class="contour1" x="35.23914488673241" y="19.79268932109444" width="67" height="67"/>
+<defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Work+Sans&amp;display=swap');</style></defs><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');</style></defs><text class="mytext" x="-10" y="20" font-family="Noto Serif" font-size="30px" fill="black"  text-anchor="start">CC</text>
+<text class="mytext" x="-10" y="25" font-family="Work Sans" font-size="7px" fill="black" text-anchor="start" ><tspan x="-10" dy="1.2em">Consulat</tspan><tspan x="-10" dy="1.2em">civique</tspan></text>
+</svg>

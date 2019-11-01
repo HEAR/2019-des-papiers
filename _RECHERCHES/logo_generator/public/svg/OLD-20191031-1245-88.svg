@@ -1,0 +1,85 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" 
+		xml:space="preserve">
+<style type="text/css">
+					
+					.contour0{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.37;
+						stroke-width:1px; 
+						fill-opacity:0.37;
+						transform:translate(49.5px, 56.5px);
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour1{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.5;
+						stroke-width:3px; 
+						fill-opacity:[object Object];
+						transform-origin:center center;
+						transform:translate(-50px, -130px) rotate(273.80069414709897deg) scale(0.22);
+						
+					}
+
+					</style>
+<style type="text/css">
+					
+					.contour2{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.5;
+						stroke-width:2px; 
+						fill-opacity:[object Object];
+						transform-origin:center center;
+						transform:translate(-50px, -130px) rotate(335.80503509200645deg) scale(0.26);
+						
+					}
+
+					</style>
+<style type="text/css">
+						.contour3{	
+							fill:none;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.21;
+							fill-opacity:0.21;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(293.90503914123036deg); 
+						}
+						</style>
+<style type="text/css">
+					
+					.contour4{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:1;
+						stroke-width:1px; 
+						fill-opacity:[object Object];
+						transform-origin:center center;
+						transform:translate(-30px, -60px) rotate(349.7004641022264deg) scale(0.3);
+						
+					}
+
+					</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 35px);
+				}
+
+			</style>
+<circle class="contour0" cx="3.6306781869324354" cy="1.0052364771290954" r="33"/>
+<polygon class="contour1" points="100.578,55.396 0.553,300.184 100.578,242.099 200.579,300.184"/><polygon class="contour2" points="100.578,55.396 0.553,300.184 100.578,242.099 200.579,300.184"/><rect class="contour3" x="40.45626776753138" y="43.346742608785355" width="11" height="11"/>
+<path class="contour4" d="M14.7,23.9c57.5-7.6,134.7-23.1,109.6,104.4C113.2,184.5,57,247.6,35.2,272.6c-14.2,16.3-22.9,22.9-21.7,24.4c0,0,159.4-81.9,159.7-215.1S14.7,23.9,14.7,23.9z" /><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');</style></defs><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Turret+Road:400,700&amp;display=swap');</style></defs><text class="mytext" x="-10" y="20" font-family="Turret Road" font-size="30px" fill="black"  text-anchor="start">CJ</text>
+<text class="mytext" x="-10" y="25" font-family="Noto Serif" font-size="7px" fill="black" text-anchor="start" ><tspan x="-10" dy="1.2em">Communauté</tspan><tspan x="-10" dy="1.2em">judiciaire</tspan></text>
+</svg>

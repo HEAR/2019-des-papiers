@@ -1,0 +1,54 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="198px" height="113px" viewBox="0 0 198 113" 
+		xml:space="preserve">
+<style type="text/css">
+						.contour0{	
+							fill:black;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.01;
+							fill-opacity:0.01;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(219.3316346187849deg); 
+						}
+						</style>
+<style type="text/css">
+					
+					.contour1{	
+						fill:none;
+						stroke:#000000;
+						stroke-miterlimit:10;
+						stroke-opacity:0.02;
+						stroke-width:1px; 
+						fill-opacity:0.02;
+						transform:translate(49.5px, 56.5px);
+					}
+
+					</style>
+<style type="text/css">
+						.contour2{	
+							fill:none;
+							stroke:#000000;
+							stroke-width:1px; 
+							stroke-miterlimit:10;
+							stroke-opacity:0.1;
+							fill-opacity:0.1;
+							transform:translate(149.5px, 56.5px);
+							transform-origin:center center;
+							transform:rotate(340.90735796046863deg); 
+						}
+						</style>
+<style type="text/css">
+				
+				.mytext{	
+					transform:translate(100px, 35px);
+				}
+
+			</style>
+<rect class="contour0" x="40.15083519404858" y="24.086975651531475" width="54" height="54"/>
+<circle class="contour1" cx="6.048147794751628" cy="0.24170026883209772" r="19"/>
+<rect class="contour2" x="40.83980514722079" y="37.13543271290533" width="43" height="43"/>
+<defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Work+Sans&amp;display=swap');</style></defs><defs><style type="text/css">@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&amp;display=swap');</style></defs><text class="mytext" x="-10" y="20" font-family="Black Ops One" font-size="30px" fill="black"  text-anchor="start">AT</text>
+<text class="mytext" x="-10" y="25" font-family="Work Sans" font-size="7px" fill="black" text-anchor="start" ><tspan x="-10" dy="1.2em">Assemblée</tspan><tspan x="-10" dy="1.2em">tamponnée</tspan></text>
+</svg>
