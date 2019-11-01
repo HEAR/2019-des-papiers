@@ -4,18 +4,62 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0">
-		<title>Machine Aubette Flyer</title>
-		<link rel="stylesheet" href="fonts/roboto/stylesheet.css">
-		<link rel="stylesheet" href="fonts/vandoesburg/stylesheet.css">
-		<link rel="stylesheet" href="css/style.css">
+		<title>des papiers | VERSO</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/fonts.css">
+		<link rel="stylesheet" href="../css/style.css">
 
 </head>
-<body class="ruler verso">
-	<div id="fond">
+<!-- règles -> classe ruler -->
+<body class="verso">
+	<div id="page">
 
-		<p>VERSO Ceci est le verso</p>
+		<div id="top" class="bloc">
+			<pre>Attestation
+     de
+     passage
+     au
+festival
+visions d’
+exil</pre>
+			<div id="col1" class="size8">
+				<p>3<sup>e</sup> édition<br>
+				01.11 — 30.01.2019</p>
+				<p><span class="coreen">최정은</span> (Jungeun&nbsp;Choi), Charles&nbsp;Duminil, Mäylis&nbsp;d’Haultfœuille, Лаура Курамысова (Laura&nbsp;Kuramyssova), Lucile&nbsp;Pagès, Glenn&nbsp;Espinosa, Tanguy&nbsp;Lecomte, Maéva&nbsp;Sanz, Sarah&nbsp;Chauveau, Bahia&nbsp;Ourahou, Arthur&nbsp;Motais de&nbsp;Narbonne, <span class="coreen">배소현</span> (So&#8209;Hyun&nbsp;Bae), Jeff&nbsp;Guess, Loïc&nbsp;Horellou, Judith&nbsp;Depaule, Yohanna&nbsp;My Nguyen, Jérôme Saint&#8209;Loubert&nbsp;Bié</p>
+			</div>
+			<div id="col2" class="size12 break">
+				<p>Ce document a été conçu par un groupe d’étudiants de deux écoles d’arts, l’École nationale supérieure des arts de Paris-Cergy (ENSAPC) et la Haute école des arts du Rhin (HEAR), en partenariat avec l’atelier des artistes en exil (aa-e) et l’Office français de protection des réfugiés et apatrides (Ofpra)*.</p>
+				<p>Chaque feuillet est unique et généré automatiquement en interaction avec les visiteurs. Il est composé d’éléments graphiques extraits de documents conservés dans les archives de l’Ofpra.</p>
+			</div>
+			<div id="col3" class="size7 break">
+				<p>* L’Ofpra est un établissement public administratif indépendant à compétence nationale créé par la loi du 25&nbsp;juillet 1952, chargé de l’application des textes relatifs à la reconnaissance de la qualité de réfugié et d’apatride. Ses deux missions principales sont de se prononcer sur le droit des demandeurs à se voir reconnaitre la protection de la France et, s’ils sont reconnus réfugiés ou apatrides, exercer à leur égard une protection juridique et administrative, à la place de leur Etat d’origine.</p>
+				<p>En application de la Convention de Genève du 28&nbsp;juillet 1951 relative au statut des réfugiés, l’Ofpra a exercé cette mission pour toutes les demandes présentées à partir de 1952, et a aussi assuré le suivi de la protection des réfugiés s’étant vus reconnaître le statut Nansen entre 1922 et 1952. Il a en conséquence hérité des archives des institutions l’ayant précédé tels que les Offices russes, arméniens et géorgiens.</p>
+				<p>Depuis 1952, l’Office a protégé environ un million de personnes.</p>
+			</div>
+		</div>
 
-		
+		<div id="bottom" class="bloc">
+			<pre>Attestation
+     de
+     passage
+     au
+festival
+visions d’
+exil</pre>
+			<div id="col1" class="size8">
+				<p>3<sup>e</sup> édition<br>
+				01.11 — 30.01.2019</p>
+			</div>
+			<div id="col2" class="size12 break">
+				<p>Ce document a été conçu par un groupe d’étudiants de deux écoles d’arts, l’École nationale supérieure des arts de Paris-Cergy (ENSAPC) et la Haute école des arts du Rhin (HEAR), en partenariat avec l’atelier des artistes en exil (aa-e) et l’Office français de protection des réfugiés et apatrides (Ofpra)*.</p>
+				<p>Chaque feuillet est unique et généré automatiquement en interaction avec les visiteurs. Il est composé d’éléments graphiques extraits de documents conservés dans les archives de l’Ofpra.</p>
+			</div>
+			<div id="col3" class="size7 break">
+				<p>* L’Ofpra est un établissement public administratif indépendant à compétence nationale créé par la loi du 25 juillet 1952, chargé de l’application des textes relatifs à la reconnaissance de la qualité de réfugié et d’apatride. Ses deux missions principales sont de se prononcer sur le droit des demandeurs à se voir reconnaitre la protection de la France et, s’ils sont reconnus réfugiés ou apatrides, exercer à leur égard une protection juridique et administrative, à la place de leur Etat d’origine.</p>
+				<p>En application de la Convention de Genève du 28 juillet 1951 relative au statut des réfugiés, l’Ofpra a exercé cette mission pour toutes les demandes présentées à partir de 1952, et a aussi assuré le suivi de la protection des réfugiés s’étant vus reconnaître le statut Nansen entre 1922 et 1952. Il a en conséquence hérité des archives des institutions l’ayant précédé tels que les Offices russes, arméniens et géorgiens.</p>
+				<p>Depuis 1952, l’Office a protégé environ un million de personnes.</p>
+			</div>
+		</div>
 
 
 	</div>
@@ -23,14 +67,33 @@
 
 
 
-	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script>
 		
-		$(document).ready(function(){
+		$(function(){
 
-			console.log("des papiers READY");
+			console.log("des papiers RECTO READY");
 
-			
+			$.ajax({
+				url: "langues.json"
+			}).done(function(data) {
+
+				let langParam = "arabe"
+
+				console.log(data[langParam].titre)
+
+				$("body").addClass( langParam )
+
+				if(data[langParam].direction === "rtl" ){
+					$("#bottom").addClass("rtl")
+				}
+				
+				$("#bottom pre").html( data[langParam].titre )
+				$("#bottom #col1").html( data[langParam].col1 )
+				$("#bottom #col2").html( data[langParam].col2 )
+				$("#bottom #col3").html( data[langParam].col3 )
+
+			});
 
 		})
 

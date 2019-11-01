@@ -4,156 +4,115 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0">
-		<title>Machine Aubette Flyer</title>
-		<link rel="stylesheet" href="fonts/roboto/stylesheet.css">
-		<link rel="stylesheet" href="fonts/vandoesburg/stylesheet.css">
-		<link rel="stylesheet" href="css/style.css">
+		<title>des papiers | RECTO</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/fonts.css">
+		<link rel="stylesheet" href="../css/style.css">
 
 </head>
-<body class="ruler recto">
-	<div id="fond">
+<!-- règles -> classe ruler -->
+<body class="recto">
+	<div id="page">
 
-		<div id="texte1">RECTO Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ducimus nostrum harum, mollitia, ratione facilis delectus nesciunt neque doloremque aliquid repellat. Voluptatem autem repudiandae possimus dolorem nemo ad eveniet eum!</div>
-		<div id="texte2">texte 2</div>
-		<div id="texte3">texte 3</div>
-
-		
-
-		<img src="" id="img1">  
-		<img src="" id="img2">
-		<img src="" id="img3">
+		<div id="scans">
 			
-		<div id="heure">
-			<span id="hh">00</span><span class="sep">:</span><span id="mm">00</span><span class="sep">:</span><span id="ss">00</span>
 		</div>
 
+		<div id="info">
+			<p class="id size28">N°&nbsp;191031-1124-45</p>
+			<p class="nom size19">Duminil Saint-Loubert<br>Horellou Nguyen</p>
+
+			<img id="photo" src="../photos/charles.jpg" alt="">
+		</div>
+
+		<div id="trame"></div>
+
+		<div id="recit">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quia dolorum molestias placeat rerum autem recusandae ratione, esse sed amet consequatur quisquam voluptatem est error ad quod magnam dolore facilis!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi odit ipsa nesciunt delectus explicabo, eaque, numquam facilis vitae consequatur placeat aperiam voluptatibus id. Hic eos, voluptate voluptates fuga quo autem.</p>
+		</div>
 	</div>
 
 
 
 
-	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script>
 		
-		$(document).ready(function(){
+		$(function(){
 
-			console.log("des papiers READY");
+			console.log("des papiers VERSO READY");
 
-			// var params = getSearchParamaters();
+			$.ajax({
+				url: "images.json"
+			}).done(function(data) {
 
-			// $("#texte1").text( decodeURIComponent(params.texte1 ) );
-			// $("#texte2").text( decodeURIComponent(params.texte2 ) );
-			// $("#texte3").text( decodeURIComponent(params.texte3 ) );
+				// let fin 	= shuffleArr(data.fin).slice(0, shuffleInt(2,3) )
+				// let normal 	= shuffleArr(data.normal).slice(0, shuffleInt(2,2) )
+				// let dense 	= shuffleArr(data.dense).slice(0, shuffleInt(2,3) )
 
-			// $("#img1").attr("src", "images/"+params.image1 );
-			// $("#img2").attr("src", "images/"+params.image2 );
-			// $("#img3").attr("src", "images/"+params.image3 );
+				let all		= shuffleArr(data.fin).slice(0, shuffleInt(2,3) )
+								.concat( shuffleArr(data.normal).slice(0, shuffleInt(2,3) ) )
+								.concat( shuffleArr(data.dense).slice(0, shuffleInt(2,2) ) )
 
+				let mot 	= shuffleArr(data.mot).slice(0, shuffleInt(2,3) )
 
+				// console.log("all",all)
+				// console.log("mot",mot)
 
-			// placementImage("#img1");
-			// placementImage("#img2");
-			// placementImage("#img3");
+				all.forEach(function(im){
 
-			// var nrbImages = Math.round( Math.random() * 2 ) + 1;
+					let p = `../images/scans/${im.path}`
+					let w = shuffleFloat(im.wMin,im.wMax,0)
+					let r = shuffleFloat(im.rMin,im.rMax,3)
 
+					let img = $("<img>")
+						.attr("src", p)
+						.css( 'top', `${ Math.random()*29.7 }cm`)
+						.css( 'left', `${Math.random()*21 }cm`)
+						.width( `${w}mm` )
+						.css( 'transform', `rotate(${r}deg)`)
 
-			// placementTexte("#texte1", 0.5, 39);
-			// placementTexte("#texte2", 0.5, 10);
-			// placementTexte("#texte3", 0.5, 5);
+					$("#scans").append(img)
+				})
 
+				mot.forEach(function(im){
 
-			// var horaire = new Date();
+					let p = `../images/scans/${im.path}`
+					let w = shuffleFloat(im.wMin,im.wMax,0)
+					let r = shuffleFloat(im.rMin,im.rMax,3)
 
-			// console.log( horaire.getHours() + ":" + horaire.getMinutes() + ":" + horaire.getSeconds());
+					let img = $("<img>")
+						.attr("src", p)
+						.css( 'top', `${ Math.random()*29.7 }cm`)
+						.css( 'left', `${Math.random()*21 }cm`)
+						.width( `${w}mm` )
+						.css( 'transform', `rotate(${r}deg)`)
 
+					$("#scans").append(img)
+				})
 
-			// $("#hh").text( ("00" + horaire.getHours() ).substr(-2)  );
-			// $("#mm").text( ("00" + horaire.getMinutes() ).substr(-2) );
-			// $("#ss").text( ("00" + horaire.getSeconds() ).substr(-2) );
-
-
-			// placementHoraire();
+			});
 
 		})
 
-
-		function getSearchParamaters(){
-			var prmstr = window.location.search.substr(1);
-			return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-		}
-
-		function transformToAssocArray(prmstr){
-			var params = {};
-			var prmarr = prmstr.split("&");
-			for( var i = 0; i < prmarr.length; i++){
-				var tmparr = prmarr[i].split("=");
-				params[ tmparr[0] ] = tmparr[1];
+		function shuffleArr(a) {
+			for (let i = a.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[a[i], a[j]] = [a[j], a[i]];
 			}
-
-			return params;
+			return a;
 		}
 
-
-		function placementImage(id){
-
-			var diagonale = Math.round( Math.random() * (20-7) ) + 7;
-			largeur = Math.sqrt( diagonale * diagonale / 2 );
-			var angle 	= Math.floor( Math.random() * 4 ) * 90 + 45;
-			var posX  	= Math.round( Math.random() * (20 + diagonale) ) - diagonale/2 + (diagonale%2 == 0 ? 0 : -0.5);
-			var posY	= Math.round( Math.random() * (20 + diagonale) ) - diagonale/2 + (diagonale%2 == 0 ? 0 : -0.5);
-
-			$(id)
-			.width(largeur + "cm")
-			.height(largeur + "cm")
-			.css("margin-left", -largeur/2+ "cm")
-			.css("margin-top", -largeur/2+ "cm")
-			.css("transform", "rotate("+angle+"deg)")
-			.css("top", posX + "cm")
-			.css("left", posY + "cm");
-
+		function shuffleInt(min,max){
+			return min+Math.round( Math.random()*(max-min) ) 
 		}
 
-		function placementTexte(id, min, max){
+		function shuffleFloat(min,max,precision){
+			let decimales = Math.pow(10,precision)
 
-			var largeur = Math.round( Math.random() * (20-7) ) + 7;
-			var angle 	= Math.floor( Math.random() * 4 ) * 90 + 45;
-			var posX  	= Math.round( Math.random() * 18) + 1;
-			var posY	= Math.round( Math.random() * 18) + 1;
-
-			var fontSize = Math.round( Math.random() * max )/2 + min;
-
-			console.log(fontSize);
-			// var lineHeight = 
-
-			$(id)
-			.width(largeur + "cm")
-			.css("transform", "rotate("+angle+"deg)")
-			.css("top", posX + "cm")
-			.css("left", posY + "cm")
-			.css("font-size", fontSize + "rem");
-
+			return Math.round( decimales*(min + Math.random()*(max-min) ) )/decimales
 		}
-
-
-		function placementHoraire(){
-			var fontSize = Math.round( Math.random() * 6 )/2 +3;
-			var posX  	 = Math.round( Math.random() * (20 - fontSize) ) + fontSize;
-
-
-			$("#heure")
-			.css("left", posX + "cm")
-			.css("font-size", fontSize + "rem");
-
-			var largeur = $("#heure").outerWidth(true);
-
-			var posY = Math.round( Math.random() * ( $("#fond").height() - largeur) );
-
-			console.log(largeur);
-
-			$("#heure").css("top", posY);
-		}
-
 
 	</script>
 
