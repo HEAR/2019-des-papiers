@@ -7,7 +7,8 @@ var images = {
 	"normal":[],
 	"dense":[],
 	"fin":[],
-	"mot":[]
+	"mot":[],
+	"photos":[]
 }
 
 
