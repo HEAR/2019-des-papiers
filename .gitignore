@@ -91,3 +91,7 @@ typings/
 public/.DS_Store
 
 _RECHERCHES/fonts/
+
+assets/*
+public/photos/*
+public/data/*
