@@ -1,4 +1,6 @@
-
+/**
+ * --------------- SERIF -----------
+ */
 
 /* regular */
 @font-face {
@@ -24,14 +26,9 @@
     font-style: normal;
 }
 
-/* coreen black*/
-@font-face {
-	font-family: 'NotoKR';
-	src: url(../fonts/NotoSerifCJKkr-hinted/NotoSerifCJKkr-Black.otf);
-	font-weight: 800;
-	font-style: normal;
-}
-
+/**
+ * --------------- SANS -----------
+ */
 
 /* sans bold */
 @font-face {
@@ -49,3 +46,39 @@
     font-weight: 500;
 }
 
+/* sans medium */
+@font-face {
+    font-family: 'NotoSansCondensed';
+    src: url(../fonts/NotoSans-unhinted/NotoSans-CondensedBlack.ttf);
+    font-style: normal;
+    font-weight: 800;
+}
+
+/**
+ * --------------- COREEN + ARABIC -----------
+ */
+
+/* coreen black*/
+@font-face {
+	font-family: 'NotoKR';
+	src: url(../fonts/NotoSerifCJKkr-hinted/NotoSerifCJKkr-Black.otf);
+	font-weight: 800;
+	font-style: normal;
+}
+
+/* coreen regular*/
+@font-face {
+    font-family: 'NotoKR';
+    src: url(../fonts/NotoSerifCJKkr-hinted/NotoSerifCJKkr-Regular.otf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* arabe bold*/
+@font-face {
+	font-family: 'NotoArabic';
+	src: url(../fonts/NotoNaskhArabic-unhinted/NotoNaskhArabic-Bold.ttf);
+	/*font-weight: 800;*/
+	font-style: normal;
+}

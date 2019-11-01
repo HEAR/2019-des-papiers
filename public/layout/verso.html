@@ -12,7 +12,7 @@
 </head>
 <!-- règles -> classe ruler -->
 <body class="verso">
-	<div id="page">
+	<div id="page" style="transform:rotate(0deg)">
 
 		<div id="top" class="bloc">
 			<pre>Attestation
@@ -74,28 +74,66 @@ exil</pre>
 
 			console.log("des papiers RECTO READY");
 
+			langParam = "francais"
+
+			var params = getSearchParamaters()
+			let uniqueID = params.uniqueID
+
 			$.ajax({
-				url: "langues.json"
+				url: `../data/${uniqueID}.json`
 			}).done(function(data) {
+				console.log(data)
 
-				let langParam = "arabe"
+				langParam = data.langue
 
-				console.log(data[langParam].titre)
 
-				$("body").addClass( langParam )
 
-				if(data[langParam].direction === "rtl" ){
-					$("#bottom").addClass("rtl")
-				}
-				
-				$("#bottom pre").html( data[langParam].titre )
-				$("#bottom #col1").html( data[langParam].col1 )
-				$("#bottom #col2").html( data[langParam].col2 )
-				$("#bottom #col3").html( data[langParam].col3 )
+				$.ajax({
+					url: "langues.json"
+				}).done(function(data) {
+
+					// let langParam = "coreen"
+
+					console.log(data[langParam].titre)
+
+					$("body").addClass( langParam )
+
+					if(data[langParam].direction === "rtl" ){
+						$("#bottom").addClass("rtl")
+					}
+					
+					$("#bottom pre").html( data[langParam].titre )
+					$("#bottom #col1").html( data[langParam].col1 )
+					$("#bottom #col2").html( data[langParam].col2 )
+					$("#bottom #col3").html( data[langParam].col3 )
+
+				});
+
 
 			});
 
+
+
+			
+
 		})
+
+
+		function getSearchParamaters(){
+			var prmstr = window.location.search.substr(1)
+			return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {}
+		}
+
+		function transformToAssocArray(prmstr){
+			var params = {}
+			var prmarr = prmstr.split("&")
+			for( var i = 0; i < prmarr.length; i++){
+				var tmparr = prmarr[i].split("=")
+				params[ tmparr[0] ] = tmparr[1]
+			}
+
+			return params
+		}
 
 
 

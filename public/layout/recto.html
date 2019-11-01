@@ -14,12 +14,12 @@
 <body class="recto">
 	<div id="page">
 
-		<div id="scans">
-			
-		</div>
+		<div id="scans"></div>
+
+		<div id="logo"></div>
 
 		<div id="info">
-			<p class="id size28">N°&nbsp;191031-1124-45</p>
+			<p class="id size28 condensed">N&ordm;&nbsp;<span>191031-1124-45</span></p>
 			<p class="nom size19">Duminil Saint-Loubert<br>Horellou Nguyen</p>
 
 			<img id="photo" src="../photos/charles.jpg" alt="">
@@ -37,12 +37,59 @@
 
 
 	<script src="../js/jquery-3.3.1.min.js"></script>
+	<!-- <script src="../js/JavaScript-Load-Image-2.24.0/js/load-image.all.min.js"></script> -->
+	<script src="../js/imagesloaded.pkgd.min.js"></script>
 	<script>
+
+
 		
 		$(function(){
 
 			console.log("des papiers VERSO READY");
 
+			$(".nom").html("")
+
+			var params = getSearchParamaters()
+			let uniqueID = params.uniqueID
+
+			$.ajax({
+				url: `../data/${uniqueID}.json`
+			}).done(function(data) {
+				console.log(data)
+
+				$("#photo").attr("src", `../photos/${data.filename}`)
+				$(".nom").html(`${data.nom}<br>${data.prenom}`)
+				$("#logo")
+					.load(`../svg/${data.id}.svg`)
+					.css("transform", `scale(${1.5/*+Math.random()*/})`)
+
+				let idArr = data.id.split(/[-_]+/)
+
+				let simpleID = idArr[0].substr(2)+idArr[1]+idArr[2]+"-"+idArr[3]+idArr[4]+"-"+idArr[6]
+
+				console.log(simpleID)
+
+				$('.id span').html(`${simpleID}`)
+
+
+
+				// document.getElementById("photo").onchange = function(e) {
+				// 	loadImage(
+				// 		`../photos/${data.filename}`,
+				// 		function(img) {
+				// 			document.body.appendChild(img);
+				// 		},
+				// 		{ maxWidth: 600 } // Options
+				// 	);
+				// };
+
+			});
+
+
+
+			/**
+			 * -------------- SCANS --------------
+			 */
 			$.ajax({
 				url: "images.json"
 			}).done(function(data) {
@@ -52,10 +99,17 @@
 				// let dense 	= shuffleArr(data.dense).slice(0, shuffleInt(2,3) )
 
 				let all		= shuffleArr(data.fin).slice(0, shuffleInt(2,3) )
-								.concat( shuffleArr(data.normal).slice(0, shuffleInt(2,3) ) )
-								.concat( shuffleArr(data.dense).slice(0, shuffleInt(2,2) ) )
+								.concat( shuffleArr(data.normal).slice(0, shuffleInt(1,2) ) )
+								.concat( shuffleArr(data.dense).slice(0, shuffleInt(1,2) ) )
 
-				let mot 	= shuffleArr(data.mot).slice(0, shuffleInt(2,3) )
+				let mot 	= shuffleArr(data.mot).slice(0, shuffleInt(3,6) )
+
+				let photos 	= shuffleArr(data.photos).slice(0, 1)
+
+
+				console.log(photos)
+
+				$("#trame").css('background-image', `url(../images/scans/${photos[0].path})`)
 
 				// console.log("all",all)
 				// console.log("mot",mot)
@@ -68,12 +122,14 @@
 
 					let img = $("<img>")
 						.attr("src", p)
-						.css( 'top', `${ Math.random()*29.7 }cm`)
-						.css( 'left', `${Math.random()*21 }cm`)
+						.css( 'top', `${ Math.random()*24.7 + 5 }cm`)
+						.css( 'left', `${ Math.random()*21 }cm`)
 						.width( `${w}mm` )
 						.css( 'transform', `rotate(${r}deg)`)
 
 					$("#scans").append(img)
+
+					// console.log( img.width() )
 				})
 
 				mot.forEach(function(im){
@@ -84,13 +140,49 @@
 
 					let img = $("<img>")
 						.attr("src", p)
-						.css( 'top', `${ Math.random()*29.7 }cm`)
+						.css( 'top', `${ Math.random()*24.7 + 5 }cm`)
 						.css( 'left', `${Math.random()*21 }cm`)
 						.width( `${w}mm` )
 						.css( 'transform', `rotate(${r}deg)`)
 
 					$("#scans").append(img)
 				})
+
+
+				$('#scans').imagesLoaded( function() {
+					console.log("images have loaded")
+
+					$('#scans img').each(function(){
+
+						// console.log( $(this).width(), $(this).height() )
+
+						$(this).css("margin-left", -$(this).width()/2 )
+						$(this).css("margin-top", -$(this).height()/2 )
+
+					})
+				});
+
+			});
+
+
+
+			/**
+			 * -------------- RECITS --------------
+			 */
+			$.ajax({
+				url: "recits.json"
+			}).done(function(data) {
+
+				recit 	= shuffleArr(data.recits).slice(0,1)[0]
+
+				fond 	= data.fond
+				titre 	= recit.titre
+				nom 	= recit.nom
+				extrait = choicer(recit.extraits)
+				
+				$("#recit").html(
+					`<p>Passage du récit de ${nom}</p><p class="extrait">${extrait}</p><p>${titre}</p><p>${fond}</p>`
+				)
 
 			});
 
@@ -112,6 +204,27 @@
 			let decimales = Math.pow(10,precision)
 
 			return Math.round( decimales*(min + Math.random()*(max-min) ) )/decimales
+		}
+
+		function choicer(somelist) {
+			var i = Math.floor(Math.random()*somelist.length);
+			return somelist[i];
+		}
+
+		function getSearchParamaters(){
+			var prmstr = window.location.search.substr(1)
+			return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {}
+		}
+
+		function transformToAssocArray(prmstr){
+			var params = {}
+			var prmarr = prmstr.split("&")
+			for( var i = 0; i < prmarr.length; i++){
+				var tmparr = prmarr[i].split("=")
+				params[ tmparr[0] ] = tmparr[1]
+			}
+
+			return params
 		}
 
 	</script>

@@ -1,6 +1,8 @@
 console.log("Des papiers")
 console.log("v0.16")
 
+// https://mensuel.framapad.org/p/WZqM6h9dVy?lang=fr
+// https://drive.google.com/drive/folders/1V_fKm-64fD6_bB5ikn67HVm4rFAx79fu
 
 /**
  * ------------------         LIB          ------------------
@@ -22,6 +24,10 @@ const bodyParser 		= require('body-parser')
 const multer  			= require('multer')
 
 
+// let fixRotation 		= require('fix-image-rotation')
+const jo 				= require('jpeg-autorotate')
+const options 			= {quality: 85}
+
 
 // SELF CREATED
 const Logo 				= require('./Logo')
@@ -39,9 +45,9 @@ const port 				= 3000
  * ------------------ GESTION DES DOSSIERS ------------------
  */
 const folderOut 		= '/public/photos/'
+const dataOut			= '/public/data/'
 const pdfTempOut		= './tmp/'
 const pdfOut			= './assets/pdf/'
-const dataOut			= '/assets/data/'
 
 // on crée le dossier de sortie des images et des pdf
 mkdirp(folderOut, function(err){})
@@ -52,6 +58,8 @@ mkdirp(dataOut, function(err){})
  * ----------------------------------------------------------
  */
 
+
+var lastID = 0;
 
 
 
@@ -94,10 +102,21 @@ app.post('/save', function (req, res) {
 
 
 	let uniqueID = new Date().toISOString().slice(0, 19).replace('T', ' ').replaceAll(':', '-').replace(' ', '_') + "_" + req.body.id
+
+
+	// lastID = req.body.id
+
 	// let file = __dirname + "/public/photos/" + req.file.name 
 	var file = `${__dirname}${folderOut}${uniqueID}.jpg`
 
 	fs.readFile( req.file.path, function (err, data) {
+
+		// let ArrayOfFilesToBeRotated = [File1, File2]
+		// let myRotationFunction = async function (ArrayOfFilesToBeRotated) {
+		// 	let blobOfArray = await fixRotation.fixRotation(ArrayOfFilesToBeRotated)
+		// 	return blobOfArray
+		// }
+
 		fs.writeFile(file, data, function (err) {
 			if( err ) {
 				console.log( err );
@@ -108,18 +127,29 @@ app.post('/save', function (req, res) {
 					id: uniqueID,
 					nom:req.body.nom,
 					prenom:req.body.prenom,
+					langue: req.body.langue,
 					filename: uniqueID + ".jpg"
 					// filename:req.file.name!==undefined?req.file.name:false
 				}
+
+				// jo.rotate( `${__dirname}${folderOut}${uniqueID}.jpg`, options )
+				// .catch((error) => {
+				// 	if (error.code === jo.errors.correct_orientation) {
+				// 		console.log('The orientation of this image is already correct!')
+				// 	}
+				// })
 
 				console.log(response)
 
 				// on sauvegarde le fichier json
 				try {
-					fs.writeFileSync(path.join(__dirname, 'assets', 'data' , `${response.id}.json`), JSON.stringify(response))
+					fs.writeFileSync(path.join(__dirname, 'public', 'data' , `${response.id}.json`), JSON.stringify(response))
 				} catch (e) {
 					console.log(e)
 				}
+
+				var logo = new Logo(366, 113, "", "", uniqueID)
+				logo.exportLogo()
 
 			}
 			res.end( JSON.stringify( response ) )
@@ -133,30 +163,81 @@ app.post('/save', function (req, res) {
 	// https://stackoverflow.com/questions/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
 	// res.redirect('/index.html')
 
-	res.redirect('/generate_pdf')
+	res.redirect(`/generate_pdf/${uniqueID}/${req.body.id}`)
+})
+
+/**
+ * GENERATE PDF WHEN get ADDRESS generate_pdf
+ */
+app.get('/generate_pdf/:uniqueID/:smallID', function(req, res){
+
+	console.log("----------> ",req.params)
+
+	generatePDF( req.params.uniqueID, req.params.smallID );
+
+	res.redirect('/index.html');
+})
+
+/**
+ * SEND JSON ID
+ */
+app.get('/get_id', function(req, res, next){
+	// https://stackoverflow.com/questions/11181546/how-to-enable-cross-origin-resource-sharing-cors-in-the-express-js-framework-o
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+
+	let response = {
+		// id : Math.floor( Math.random() * 100 )
+		id : lastID
+	}
+
+	console.log("================> SHOW lastID : "+lastID)
+
+	res.send(JSON.stringify( response ));
+})
+
+/**
+ * START SERVER
+ */
+app.listen(port, function(){
+
+	console.log(`Server "des papiers" running on port ${port}!\nhttp://localhost:${port}`)
+
 })
 
 
-function generatePDF(uniqueID){
+/**
+ * [generatePDF description]
+ * @param  {[type]} uniqueID [description]
+ * @return {[type]}          [description]
+ */
+function generatePDF( uniqueID, smallID ){
 	console.log(`generate PDF -> ${pdfOut}${uniqueID}.pdf`);
 
 
 	// https://stackoverflow.com/questions/48510210/puppeteer-generate-pdf-from-multiple-htmls
-	var rectoURL = `http://localhost:${port}/layout/recto.html`;
-	var versoURL = `http://localhost:${port}/layout/verso.html`;
+	var rectoURL = `http://localhost:${port}/layout/recto.html?uniqueID=${uniqueID}`;
+	var versoURL = `http://localhost:${port}/layout/verso.html?uniqueID=${uniqueID}`;
 
 	var pdfUrls = [rectoURL,versoURL];
 
+	console.log(pdfUrls);
 
-	(async () => {
-		const browser 	= await puppeteer.launch()
+
+	(async () => {const browser 	= await puppeteer.launch()
 		const page 		= await browser.newPage()
 
 		var pdfFiles 	= []
 
 		for(var i=0; i<pdfUrls.length; i++){
 			await page.goto(pdfUrls[i], {waitUntil: 'networkidle2'});
-			var pdfFileName = `${pdfTempOut}sample${i+1}.pdf`;
+			if(i == 0){
+				var pdfFileName = `${pdfTempOut}${uniqueID}-recto.pdf`;
+			}else if(i==1){
+				var pdfFileName = `${pdfTempOut}${uniqueID}-verso.pdf`;				
+			}
+			// var pdfFileName = `${pdfTempOut}sample${i+1}.pdf`;
 			pdfFiles.push(pdfFileName);
 			await page.pdf({path: pdfFileName, format: 'A4', printBackground: true, preferCSSPageSize:false});
 		}
@@ -164,6 +245,8 @@ function generatePDF(uniqueID){
 		await browser.close();
 
 		await mergeMultiplePDF(pdfFiles);
+
+		lastID = smallID;
 	})();
 
 	const mergeMultiplePDF = (pdfFiles) => {
@@ -182,22 +265,6 @@ function generatePDF(uniqueID){
 	};
 }
 
-
-/**
- * GENERATE PDF WHEN get ADDRESS generate_pdf
- */
-app.get('/generate_pdf', function(req, res){
-
-	generatePDF("yes2");
-
-	res.redirect('/index.html');
-})
-
-app.listen(port, function(){
-
-	console.log(`Server "des papiers" running on port ${port}!\nhttp://localhost:${port}`)
-
-})
 
 String.prototype.replaceAll = function(search, replacement) {
 	var target = this;
