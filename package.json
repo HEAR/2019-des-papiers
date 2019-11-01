@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "directory-scanner": "^1.1.0",
     "easy-pdf-merge": "^0.2.2",
     "express": "^4.17.1",
     "mkdirp": "^0.5.1",

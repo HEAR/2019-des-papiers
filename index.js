@@ -1,5 +1,5 @@
 console.log("Des papiers")
-console.log("v0.12")
+console.log("v0.16")
 
 
 /**
@@ -39,8 +39,8 @@ const port 				= 3000
  * ------------------ GESTION DES DOSSIERS ------------------
  */
 const folderOut 		= '/public/photos/'
-const pdfTempOut		= '/tmp/'
-const pdfOut			= '/assets/pdf/'
+const pdfTempOut		= './tmp/'
+const pdfOut			= './assets/pdf/'
 const dataOut			= '/assets/data/'
 
 // on crée le dossier de sortie des images et des pdf
@@ -71,7 +71,7 @@ app.use( bodyParser.urlencoded({ extended: false }) )
 app.use( multer({dest:'/tmp/'}).single('file') );
 
 
-app.get('/index.html', function (req, res) {
+app.get('/index.html', function (req, res, next) {
 	res.sendFile( __dirname + "/public/" + "index.html" );
 })
 
@@ -116,7 +116,7 @@ app.post('/save', function (req, res) {
 
 				// on sauvegarde le fichier json
 				try {
-					fs.writeFileSync(path.join(__dirname, 'data' , `${response.id}.json`), JSON.stringify(response))
+					fs.writeFileSync(path.join(__dirname, 'assets', 'data' , `${response.id}.json`), JSON.stringify(response))
 				} catch (e) {
 					console.log(e)
 				}
@@ -127,13 +127,20 @@ app.post('/save', function (req, res) {
 	})
 
 	// res.end( JSON.stringify( "ok "+req.body.id ) );
+	
+	// generatePDF( uniqueID );
 
 	// https://stackoverflow.com/questions/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
-	res.redirect('/index.html')
+	// res.redirect('/index.html')
+
+	res.redirect('/generate_pdf')
 })
 
 
 function generatePDF(uniqueID){
+	console.log(`generate PDF -> ${pdfOut}${uniqueID}.pdf`);
+
+
 	// https://stackoverflow.com/questions/48510210/puppeteer-generate-pdf-from-multiple-htmls
 	var rectoURL = `http://localhost:${port}/layout/recto.html`;
 	var versoURL = `http://localhost:${port}/layout/verso.html`;
@@ -177,13 +184,11 @@ function generatePDF(uniqueID){
 
 
 /**
- * 
+ * GENERATE PDF WHEN get ADDRESS generate_pdf
  */
 app.get('/generate_pdf', function(req, res){
 
-	
-	generatePDF("yes");
-	
+	generatePDF("yes2");
 
 	res.redirect('/index.html');
 })
