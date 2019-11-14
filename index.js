@@ -25,7 +25,7 @@ const multer  			= require('multer')
 
 
 // let fixRotation 		= require('fix-image-rotation')
-const jo 				= require('jpeg-autorotate')
+// const jo 				= require('jpeg-autorotate')
 const options 			= {quality: 85}
 
 
