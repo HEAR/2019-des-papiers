@@ -10,18 +10,24 @@
   "license": "ISC",
   "dependencies": {
     "@svgdotjs/svg.js": "^3.0.16",
-    "svgdom": "0.0.21",
+    "bash": "0.0.1",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
     "directory-scanner": "^1.1.0",
     "easy-pdf-merge": "^0.2.2",
     "express": "^4.17.1",
     "fix-image-rotation": "^2.0.0",
     "jpeg-autorotate": "^5.0.2",
+    "js": "^0.1.0",
     "mkdirp": "^0.5.1",
     "multer": "^1.4.2",
+    "node-gyp": "^6.0.1",
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^1.20.0",
+    "shell": "^0.5.0",
+    "shelljs": "^0.8.3",
+    "svgdom": "0.0.21"
   },
   "nodemonConfig": {
     "ignore": [

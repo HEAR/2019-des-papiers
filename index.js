@@ -23,6 +23,8 @@ const merge 			= require('easy-pdf-merge')
 const bodyParser 		= require('body-parser')
 const multer  			= require('multer')
 
+const shell = require('shelljs')
+
 
 // let fixRotation 		= require('fix-image-rotation')
 // const jo 				= require('jpeg-autorotate')
@@ -30,7 +32,8 @@ const options 			= {quality: 85}
 
 
 // SELF CREATED
-const Logo 				= require('./Logo')
+// const Logo 				= require('./Logo')
+const LogoOld 				= require('./LogoOld')
 
 
 
@@ -110,6 +113,7 @@ app.post('/save', function (req, res) {
 	// let file = __dirname + "/public/photos/" + req.file.name 
 	var file = `${__dirname}${folderOut}${uniqueID}.jpg`
 
+	// on charge les données de la photo
 	fs.readFile( req.file.path, function (err, data) {
 
 		// let ArrayOfFilesToBeRotated = [File1, File2]
@@ -118,6 +122,7 @@ app.post('/save', function (req, res) {
 		// 	return blobOfArray
 		// }
 
+		// on écrit les données de la photo
 		fs.writeFile(file, data, function (err) {
 			if( err ) {
 				console.log( err );
@@ -149,7 +154,8 @@ app.post('/save', function (req, res) {
 					console.log(e)
 				}
 
-				var logo = new Logo(351, 340, "", "", uniqueID)
+				
+				let logo = new LogoOld(351, 340, "", "", uniqueID)
 				logo.exportLogo()
 
 			}
@@ -191,10 +197,10 @@ app.get('/get_id', function(req, res, next){
 	let response = {
 		// id : Math.floor( Math.random() * 100 )
 		id : lastID,
-		logo: path.join('169.254.155.152:3000', 'svg' , `${uniqueID}.svg`)
+		logo: `http://169.254.155.152:3000/svg/${uniqueID}.svg`
 	}
 
-	console.log("================> SHOW lastID : "+lastID)
+	console.log(`================> SHOW lastID : ${lastID}, SVG : ${response.logo}`)
 
 	res.send(JSON.stringify( response ));
 })
@@ -204,7 +210,7 @@ app.get('/get_id', function(req, res, next){
  */
 app.listen(port, function(){
 
-	console.log(`Server "des papiers" running on port ${port}!\nhttp://localhost:${port}`)
+	console.log(`Server "des papiers" running on port ${port}!\n> http://localhost:${port} <\n`)
 
 })
 
@@ -261,6 +267,12 @@ function generatePDF( uniqueID, smallID ){
 				}
 
 				console.log('Success');
+
+				if (shell.exec(`lpr -P HP_Color_LaserJet_CP5225dn_2 -o media=A4,Lower -o sides=two-sided-short-edge ${pdfOut}${uniqueID}.pdf`).code !== 0) {
+					shell.echo('Error: Cups Printing failed');
+					shell.exit(1);
+				}
+
 				resolve();
 			});
 		});

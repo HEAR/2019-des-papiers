@@ -99,12 +99,12 @@ class Acronym {
 			acronym2: this.aacro + this.bacro,
 			acronym3: this.aacro + this.bacro + this.cacro,
 			acronym4: this.aacro + this.bacro + this.cacro + this.dacro,
-			// two: this.a + " " + this.b,
-			// three: this.a + " " + this.b + " " + this.c,
-			// four: this.a + " " + this.b + " " + this.c + " " + this.d
-			two: [this.a, this.b],
-			three: [this.a, this.b, this.c],
-			four: [this.a, this.b, this.c, this.d]
+			two: this.a + " " + this.b,
+			three: this.a + " " + this.b + " " + this.c,
+			four: this.a + " " + this.b + " " + this.c + " " + this.d
+			// two: [this.a, this.b],
+			// three: [this.a, this.b, this.c],
+			// four: [this.a, this.b, this.c, this.d]
 		};
 
 		var num = Math.floor(Math.random() * 4) + 1;

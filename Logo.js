@@ -7,7 +7,7 @@ const window = require('svgdom')
 const document = window.document
 const {
 	SVG,
-	registerWindow
+	registerWindow,
 } = require('@svgdotjs/svg.js')
 
 // register window and document
@@ -40,7 +40,9 @@ class Logo {
 		//this.type = Math.floor( Math.random() * 3 )
 		this.type = 0
 
-		// create canvas
+		console.log("CONSTRUCT LOGO")
+
+		// create canvas	
 		this.canvas = SVG(document.documentElement).size(this.width, this.height)
 
 		this.ac = new Acronym();
@@ -90,7 +92,7 @@ class Logo {
 
 
 		// use svg.js as normal
-		this.canvas.rect(this.width, this.height).fill("red").opacity(0.3).move(0, 0)
+		// this.canvas.rect(this.width, this.height).fill("red").opacity(0.3).move(0, 0)
 
 		console.log("ferré à gauche", this.nbrShape)
 
@@ -333,7 +335,8 @@ class Logo {
 
 	generateLogo() {
 		this.generateContent()
-		return this.canvas.node.outerHTML
+		// return this.canvas.node.outerHTML
+		return this.canvas.svg()
 	}
 
 	/**
@@ -353,6 +356,14 @@ class Logo {
 			}
 
 			console.log(`./public/svg/${ID}.svg ======> généré`)
+
+
+			// document.removeChild(element)
+
+			document.childNodes.forEach(child=>{
+				document.removeChild(child)
+			})
+
 
 		});
 	}
