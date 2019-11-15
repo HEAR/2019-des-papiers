@@ -1,5 +1,5 @@
 console.log("Des papiers")
-console.log("v0.16")
+console.log("v2.01")
 
 // https://mensuel.framapad.org/p/WZqM6h9dVy?lang=fr
 // https://drive.google.com/drive/folders/1V_fKm-64fD6_bB5ikn67HVm4rFAx79fu
@@ -60,6 +60,7 @@ mkdirp(dataOut, function(err){})
 
 
 var lastID = 0;
+var uniqueID;
 
 
 
@@ -101,7 +102,7 @@ app.post('/save', function (req, res) {
 
 
 
-	let uniqueID = new Date().toISOString().slice(0, 19).replace('T', ' ').replaceAll(':', '-').replace(' ', '_') + "_" + req.body.id
+	uniqueID = new Date().toISOString().slice(0, 19).replace('T', ' ').replaceAll(':', '-').replace(' ', '_') + "_" + req.body.id
 
 
 	// lastID = req.body.id
@@ -148,7 +149,7 @@ app.post('/save', function (req, res) {
 					console.log(e)
 				}
 
-				var logo = new Logo(366, 113, "", "", uniqueID)
+				var logo = new Logo(351, 340, "", "", uniqueID)
 				logo.exportLogo()
 
 			}
@@ -189,7 +190,8 @@ app.get('/get_id', function(req, res, next){
 
 	let response = {
 		// id : Math.floor( Math.random() * 100 )
-		id : lastID
+		id : lastID,
+		logo: path.join('169.254.155.152:3000', 'svg' , `${uniqueID}.svg`)
 	}
 
 	console.log("================> SHOW lastID : "+lastID)
