@@ -1,125 +1,72 @@
-const fs 			= require('fs')
-const path			= require('path')
+const fs = require('fs')
+const path = require('path')
+const Acronym = require('./Acronym')
 
-const Acronym 		= require('./Acronym')
+// returns a window with a document and an svg root node
+const window = require('svgdom')
+const document = window.document
+const {
+	SVG,
+	registerWindow
+} = require('@svgdotjs/svg.js')
+
+// register window and document
+registerWindow(window, document)
+
+// import { SVG } from '@svgdotjs/svg.js'
+
+//const SVG     = require('@svgdotjs/svg.js')
 
 // ENVISAGER D'UTILISER :
 // https://svgjs.com/docs/3.0/
+
 // https://jsfiddle.net/nayfzv5p/
 
 class Logo {
-	/**
-	 * [constructor description]
-	 * @param  {[type]} _width   [description]
-	 * @param  {[type]} _height  [description]
-	 * @param  {[type]} _name    [description]
-	 * @param  {[type]} _acronym [description]
-	 * @return {[type]}          [description]
-	 */
+
 	constructor(_width, _height, _name, _acronym, _id) {
-		// always initialize all instance properties
-		this.width 		= _width
-		this.height 	= _height
-		this.name 		= _name
-		this.acronym 	= _acronym
-		this.id 		= _id
+		// always initialize all instance properties-
+		this.width = _width
+		this.height = _height
+		this.name = _name
+		this.acronym = _acronym
+		this.id = _id
 
+		this.nbrShape = 0
 
-		console.log("ID : "+ this.id)
+		this.secuMargin = 10
 
-		this.nbrShape	= 0
-
-		this.googleFonts = [
-			{
-				name : `Work Sans`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Work+Sans&amp;display=swap');`
-			},
-			{
-				name : `Noto Serif`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');`
-			},
-		]
-
-		this.googleFontsAcronym = [
-			{
-				name : `Work Sans`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Work+Sans&amp;display=swap');`
-			},
-			{
-				name : `Noto Serif`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap');`
-			},
-			{
-				name : `Rubik Mono One`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&amp;display=swap');`
-			},
-			{
-				name : `Black Ops One`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&amp;display=swap');`
-			},
-			{
-				name : `Turret Road`,
-				import : `@import url('https://fonts.googleapis.com/css?family=Turret+Road:400,700&amp;display=swap');`
-			},
-		]
-
+		// TYPE DE LOGO
 		//this.type = Math.floor( Math.random() * 3 )
 		this.type = 0
-		this.startSVG =  `<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"${this.width}px\" height=\"${this.height}px\" viewBox=\"0 0 ${this.width} ${this.height}\" 
-		xml:space=\"preserve\">\n`
 
-		this.styleSVG = `<style type="text/css">
-				.contour{
-					fill:none;
-					stroke:#000000;
-					stroke-miterlimit:10;
-				}
-				</style>\n`
-
-		this.contentSVG = ``
-		
-		this.endSVG = `</svg>`
+		// create canvas
+		this.canvas = SVG(document.documentElement).size(this.width, this.height)
 
 		this.ac = new Acronym();
-		//this.objJson 					= this.ac.getAcronymAndName();
 
-   		//console.log(this.objJson);
-		
-		//console.log(this.getRandomAcronymAndName());
-	}
 
-	
-
-	/**
-	 * [getDim description]
-	 * @return {[type]} [description]
-	 */
-	getDim() {
-		return {
-			width: this.width, 
-			height: this.height
-		}
-	}
-
-	/**
-	 * [generateContent description]
-	 * @return {[type]} [description]
-	 */
-	generateContent() {
-		switch( this.type ){
-			case 0 :
-				this.generateLeftAligned()
-			break
-			case 1 :
-				this.generateCentered()
-			break
-			case 2 :
-				this.generateCircleLogo()
-			break
-			default :
-				this.generateCircleLogo()
-			break
-		}
+		this.googleFonts = [{
+			name: `Work Sans`,
+			import: `@import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');`,
+			sub: true
+		}, {
+			name: `Noto Serif`,
+			import: `@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');`,
+			sub: true
+		}, {
+			name: `Rubik Mono One`,
+			import: `@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');`,
+			sub: false
+		}, {
+			name: `Black Ops One`,
+			import: `@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap');`,
+			sub: false
+		}, {
+			name: `Turret Road`,
+			import: `@import url('https://fonts.googleapis.com/css?family=Turret+Road:400,700&display=swap');`,
+			sub: false
+		}, ]
 	}
 
 	/**
@@ -127,359 +74,294 @@ class Logo {
 	 * @param  {[type]} _max [description]
 	 * @return {[type]}      [description]
 	 */
-	randomNumberShape(_max){
-		return Math.ceil( Math.random() * _max +  1 )
+	randomNumberShape(_max) {
+		return Math.ceil(Math.random() * _max + 1)
 	}
+
 
 	/**
 	 * [generateLeftAligned description]
 	 * @return {[type]} [description]
 	 */
-	generateLeftAligned(){
+	generateLeftAligned() {
 		this.nbrShape = this.randomNumberShape(4)
 
-		//console.log( "ferré à gauche", this.nbrShape)
+		let dim = Math.min(this.width, this.height)
 
-		let svg = `` 
 
-		for(let i = 0; i< this.nbrShape ; i++){
+		// use svg.js as normal
+		this.canvas.rect(this.width, this.height).fill("red").opacity(0.3).move(0, 0)
 
-			let formeID = Math.ceil(4 * Math.random() )
-			var angle = Math.random()*360
+		console.log("ferré à gauche", this.nbrShape)
 
-		  	var opacityMin = 0.2
-			var opacityMax = 0.6
-			var opacity = Math.round( opacityMin + ((opacityMax - opacityMin) * Math.random()) * 100 ) / 100
 
-			stroke = 1
-			var rngStroke = Math.round(Math.random() * 5)
-			if (rngStroke == 4)
-			{
-				var stroke = Math.round(Math.random()*9) +1
+		for (let i = 0; i < this.nbrShape; i++) {
 
+			let formeID = Math.ceil(3 * Math.random())
+			let angle = Math.random() * 360
+
+			let opacityMin = 0.2
+			let opacityMax = 0.6
+			let opacity = Math.round(opacityMin + ((opacityMax - opacityMin) * Math.random()) * 100) / 100
+
+			console.log(`---------> ${formeID}`)
+
+			console.log("opacity", opacity)
+
+			let stroke = 1
+
+			if (Math.random() > 0.8) {
+				stroke = Math.round(Math.random() * 9) + 1
 			}
-			var scaleMin = 10
-			var scaleMax = 30
-			var scale = Math.round( scaleMin + ((scaleMax - scaleMin) * Math.random() )) / 100
 
-			//console.log("scale", scale)
+			console.log("stroke", stroke)
 
+			let scaleMin = 50
+			let scaleMax = (dim - this.secuMargin)
+			let scale = Math.round(scaleMin + ((scaleMax - scaleMin) * Math.random())) / 100
 
-			//console.log( "opacity", opacity )
+			console.log("scale", scale)
 
-			var fill = Math.floor(Math.random()*5)
-
-			if (fill == 1) {
+			let fill = "none"
+			if (Math.random() > 0.8) {
 				fill = "black";
-			}else{
-				fill = "none"
 			}
 
-//transform:translate(-${this.width/4}px, 0px);
-//transform:rotate(${angle}deg);
-			switch( formeID ){
-				case 1 :
-					svg += this.drawCircle(i);
+			console.log("fill", fill)
 
-			this.styleSVG += 
+			let x, y
 
-				`<style type="text/css">
-					
-					.contour`+i+`{	
-						fill:${fill};
-						stroke:#000000;
-						stroke-miterlimit:10;
-						stroke-opacity:${opacity};
-						stroke-width:${stroke}px; 
-						fill-opacity:${opacity};
-						transform:translate(${this.width/4}px, ${this.height/2}px);
+			// formeID = 4
+			switch (formeID) {
+				case 1:
+					console.log("=> circle")
+
+					let minRadius = 10
+
+					// rayon
+					var cRadius = minRadius + Math.round((dim / 2 - this.secuMargin - minRadius) * Math.random())
+
+					// position
+					var cX = dim / 2 - cRadius + (Math.random() * this.secuMargin - this.secuMargin / 2)
+					var cY = dim / 2 - cRadius + (Math.random() * this.secuMargin - this.secuMargin / 2)
+
+					this.canvas.circle(cRadius * 2)
+						.fill(fill)
+						.opacity(opacity)
+						.stroke({
+							color: '#000',
+							width: stroke
+						})
+						.move(cX, cY)
+
+					break
+				case 2:
+					console.log("=> square")
+
+					let minWidth = 10
+
+					let hypo = Math.sqrt(2 * ((dim - this.secuMargin) / 2) * ((dim - this.secuMargin) / 2))
+
+					let w = minWidth + Math.round((dim - this.secuMargin - minWidth) * Math.random())
+
+					if (w > hypo) {
+						w = hypo
 					}
 
-					</style>\n`
+					x = (dim - w) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
+					y = (dim - w) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
 
-				break
-				case 2 :
-					svg += this.drawSquare(i)
+					this.canvas.rect(w, w)
+						.fill(fill)
+						.opacity(opacity)
+						.stroke({
+							color: '#000',
+							width: stroke
+						})
+						.move(x, y)
+						.rotate(angle)
 
-				this.styleSVG += 
+					break
+				case 3:
+					console.log("=> virgule")
 
-					`<style type="text/css">
-						.contour`+i+`{	
-							fill:${fill};
-							stroke:#000000;
-							stroke-width:${stroke}px; 
-							stroke-miterlimit:10;
-							stroke-opacity:${opacity};
-							fill-opacity:${opacity};
-							transform:translate(${100 + (this.width/4)}px, ${this.height/2}px) rotate(${angle}deg);
-							transform-origin:center center;
-						}
-						</style>\n`
+					x = (dim - 50) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
+					y = (dim - 100) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
 
-				break
-				case 3 :
+					this.canvas.path('M0.4,6.3c17.2-2.3,40.3-6.9,32.8,31.2C29.9,54.3,13,73.2,6.5,80.7c-4.3,4.9-6.9,6.8-6.5,7.3c0,0,47.6-24.5,47.8-64.3 C47.9-16.2,0.4,6.3,0.4,6.3z')
+						.fill(fill)
+						.opacity(opacity)
+						.attr({
+							'stroke-linejoin': 'miter'
+						})
+						.stroke({
+							color: '#000',
+							width: stroke
+						})
+						.move(x, y)
+						.rotate(angle)
+						.scale(scale, scale)
 
-					svg += this.drawComma(i)
+					break
+				case 4:
+					console.log("=> fleche")
 
-					//console.log("commaaaaaaa")
+					x = 0
+					y = 0
 
-					this.opacityChoice = [
-						{
-							opacity : 0.5
-						},
-						{
-							opacity : 1
-						}
-					]
+					x = (dim - 50) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
+					y = (dim - 60) / 2 + (Math.random() * this.secuMargin - this.secuMargin / 2)
 
-					opacity = this.choicer(this.opacityChoice)
+					this.canvas.polygon('24.6,0.4 0.2,60.1 24.6,45.9 49,60.1')
+						.fill(fill)
+						.opacity(opacity)
+						.attr({
+							'stroke-linejoin': 'miter'
+						})
+						.stroke({
+							color: '#000',
+							width: stroke
+						})
+						.move(x, y)
+						.scale(scale, scale)
+						.rotate(angle)
 
-					this.styleSVG += 
+					break
+				default:
 
-				`<style type="text/css">
-					
-					.contour`+i+`{	
-						fill:${fill};
-						stroke:#000000;
-						stroke-miterlimit:10;
-						stroke-opacity:${opacity.opacity};
-						stroke-width:${stroke}px; 
-						fill-opacity:${opacity};
-						transform-origin:center center;
-						transform:scale(${scale})  translate(-90px, -60px) rotate(${angle}deg);
-						
-					}
-
-					</style>\n`
-
-				break
-				case 4 :
-
-					svg += this.drawArrowHead(i)
-
-					//console.log("Arrow")
-
-					this.opacityChoice = [
-						{
-							opacity : 0.5
-						},
-						{
-							opacity : 1
-						}
-					]
-
-					opacity = this.choicer(this.opacityChoice)
-
-					this.styleSVG += 
-
-				`<style type="text/css">
-					
-					.contour`+i+`{	
-						fill:${fill};
-						stroke:#000000;
-						stroke-miterlimit:10;
-						stroke-opacity:${opacity.opacity};
-						stroke-width:${stroke}px; 
-						fill-opacity:${opacity};
-						transform-origin:center center;
-						transform:scale(${scale}) translate(-50px, -130px) rotate(${angle}deg);
-						
-					}
-
-					</style>\n`
-
-				break
-			}	
-		}
-
-		let font 		= this.choicer(this.googleFonts)
-		let fontAcronym = this.choicer(this.googleFontsAcronym)
-
-		//console.log("-------------> ",font, fontAcronym)
-
-		this.styleSVG += 
-
-			`<style type="text/css">
-				
-				.mytext{	
-					transform:translate(100px, 35px);
-				}
-
-			</style>\n`
-
-		svg += `<defs><style type="text/css">${font.import}</style></defs>\n`
-		svg += `<defs><style type="text/css">${fontAcronym.import}</style></defs>\n`
-
-		//acronyme
-		svg += `<text class="mytext" x="-10" y="20" font-family="${fontAcronym.name}" font-size="30px" fill="black"  text-anchor="start">\n${this.objJson.a}</text>\n`
-
-		var words = this.objJson.n.split(` `)
-
-		this.objJson.n = ""
-
-		for (var j = 0; j <  words.length; j++) {
-
-			var stopwords = ['de', 'et', 'la', 'du', 'des'];
-
-			if (stopwords.includes(words[j-1]))
-			{
-				this.objJson.n += " " + words[j] + " "
-			}else
-			{
-				this.objJson.n += `<tspan x="-10" dy="1.2em">` + words[j] + `</tspan>\n`
+					// nothing
+					break;
 			}
-			//console.log("linebreak", lineBreak)
 		}
 
-		// this.objJson.n = `<tspan x="-10" dy="1.2em">`+this.objJson.n.split(` `).join(`</tspan>\n<tspan x="-10" dy="1.2em">`)+`</tspan>`
+
+		// ---------- LOGO + ACRONYME---------- 
+		let fontLogo = this.choicer(this.googleFonts)
+
+		let subFontArr = []
+		this.googleFonts.forEach(font=>{
+			if(font.sub == true){
+				subFontArr.push(font)
+			}
+		})
 
 
+		let fontSub = this.choicer(subFontArr)
 
-		svg += `<text class="mytext" x="-10" y="25" font-family="${font.name}" font-size="7px" fill="black" text-anchor="start" >\n${this.objJson.n}</text>\n`
-		this.contentSVG += svg
-	}
+		console.log("-------------> ", fontLogo, fontSub, fontLogo == fontSub)
 
-	/**
-	 * [generateCentered description]
-	 * @return {[type]} [description]
-	 */
-	generateCentered(){}
-	generateCircleLogo(){
-
-		this.nbrShape = this.randomNumberShape(4)
-
-
-		//console.log( "rond", this.nbrShape )
-
-		let svg = `` 
-
-		for(let i = 0; i< this.nbrShape ; i++){
-			svg += this.drawCircle()
+		
+		if(fontLogo != fontSub){
+			this.canvas.style(fontLogo.import +" "+ fontSub.import)
+		}else{
+			this.canvas.style(fontLogo.import)
 		}
-
-		this.contentSVG += svg
-	}
-
-	/**
-	 * [drawCircle description]
-	 * @return {[type]} [description]
-	 */
-	drawCircle(id){
-
-		let secuMargin = 10
-		let minRadius = 10
-		let dim = Math.min(this.width, this.height)
-
-		var cRadius = minRadius + Math.round( (dim/2 - secuMargin - minRadius)*Math.random() )
-		var cX = ((Math.random() * 20) - 10)
-		var cY = ((Math.random() * 20) - 10)
-
-		//console.log(cRadius);
-
-		return `<circle class="contour${id}" cx="${cX}" cy="${cY}" r="${cRadius}"/>\n`
-	}
-
-	/**
-	 * [drawSquare description]
-	 * @return {[type]} [description]
-	 */
-	drawSquare(id){
-
-
-		let secuMargin = 20
-		let minWidth = 10
-		let dim = Math.min(this.width, this.height)
-		
-		// let dim = Math.min(this.width, this.height)
-
-		var w = minWidth + Math.round( (dim - secuMargin - minWidth)*Math.random() )
-		var x = ((this.width - w)/4) + ((Math.random() * 20) - 10)
-		var y = ((this.height - w)/2) + ((Math.random() * 20) - 10)
-
-		// console.log("id  " + id);
-		// console.log(x, y, w);
 		
 
-		//id="${id}" class="contour"
-		//return `<rect class="contour" x=400 y=400 width="${w}" height="${w}" transform="rotate(45)"/>\n`
-		return `<rect class="contour${id}" x="${x}" y="${y}" width="${w}" height="${w}"/>\n`
-
-	}
-
-	/**
-	 * [drawArrow description]
-	 * @return {[type]} [description]
-	 */
-	drawArrow(){}
-
-	/**
-	 * [drawArrowHead description]
-	 * @return {[type]} [description]
-	 */
-	drawArrowHead(id){
-
-		return `<polygon class="contour${id}" points="100.578,55.396 0.553,300.184 100.578,242.099 200.579,300.184"/>\n`
-
-	}
-
-	/**
-	 * [drawComma description]
-	 * @return {[type]} [description]
-	 */
-	drawComma(id){
+		let xt = -10
+		let yt = 20
+		let logoSize = 60+Math.round( 30 * Math.random() )
+		let subSize = 20
 		
-			 
-		return`<path class="contour${id}" d="M14.7,23.9c57.5-7.6,134.7-23.1,109.6,104.4C113.2,184.5,57,247.6,35.2,272.6c-14.2,16.3-22.9,22.9-21.7,24.4c0,0,159.4-81.9,159.7-215.1S14.7,23.9,14.7,23.9z" />\n`
+
+		let words 		= this.objJson.n
+		let acronyme 	= this.objJson.a
+
+		//  LOGO
+		let logo = this.canvas.text( acronyme )
+
+		logo.font({
+			size: logoSize,
+			fill: '#000',
+			family: fontLogo.name
+		})
+
+		let bbox = logo.bbox()
+		let logoX = (dim-bbox.width)/2
+		let logoY = (dim - bbox.height) / 2
+
+		logo.move(logoX, logoY)
+
+		// console.log("logo w => ", bbox.width )
+
+
+		console.log("words", words)
+
+		let m = logoX //this.secuMargin
+		let soustitre = this.canvas.text(function(add) {
+			words.forEach((word, i) => {
+				add.tspan(word).x(m).dy(subSize*1.15)
+			})
+		})
+
+		soustitre.font({
+			size: subSize,
+			fill: '#000',
+			family: fontSub.name
+		}).move(this.secuMargin, logo.attr("y") + logoSize + 20)
+
+		console.log(soustitre.attr("y"))
 
 
 
-		
 	}
 
+
 	/**
-	 * [generateLogo description]
+	 * [generateContent description]
 	 * @return {[type]} [description]
 	 */
+	generateContent() {
+		this.objJson = this.ac.getAcronymAndName();
 
+		switch (this.type) {
+			case 0:
+				this.generateLeftAligned()
+				break
+			case 1:
+				this.generateCentered()
+				break
+			case 2:
+				this.generateCircleLogo()
+				break
+			default:
+				this.generateCircleLogo()
+				break
+		}
+	}
 
 
 	generateLogo() {
-		//console.log( this.type )
-
 		this.generateContent()
-
-		return this.startSVG + this.styleSVG + this.contentSVG + this.endSVG
+		return this.canvas.node.outerHTML
 	}
 
 	/**
 	 * [exportLogo description]
 	 * @return {[type]} [description]
 	 */
-	exportLogo(){
-		
-		this.styleSVG = "";
-		this.contentSVG = ""
-		this.objJson = this.ac.getAcronymAndName();
+	exportLogo() {
 
 		// ICI on sauve le fichier
-		
-		console.log("save ID : "+this.id)
+		console.log("save ID : " + this.id)
 
 		var ID = this.id
 
-		fs.writeFileSync( path.join(__dirname, 'public', 'svg' , `${ID}.svg`) /*`./public/svg/${ID}.svg`*/, this.generateLogo() , function(err) {
-			if(err) {
+		fs.writeFileSync(path.join(__dirname, 'public', 'svg', `${ID}.svg`), this.generateLogo(), function(err) {
+			if (err) {
 				return console.log(err);
 			}
 
 			console.log(`./public/svg/${ID}.svg ======> généré`)
-		}); 
+
+		});
 	}
 
 	choicer(somelist) {
-		var i = Math.floor(Math.random()*somelist.length);
+		var i = Math.floor(Math.random() * somelist.length);
 		return somelist[i];
 	}
+
 }
 
 module.exports = Logo;
