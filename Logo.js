@@ -355,17 +355,10 @@ class Logo {
 				return console.log(err);
 			}
 
-			console.log(`./public/svg/${ID}.svg ======> généré`)
-
-
-			// document.removeChild(element)
-
-			document.childNodes.forEach(child=>{
-				document.removeChild(child)
-			})
-
-
 		});
+
+		console.log(`./public/svg/${ID}.svg ======> généré`)
+		delete require.cache[require.resolve('svgdom')]
 	}
 
 	choicer(somelist) {

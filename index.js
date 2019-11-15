@@ -32,8 +32,8 @@ const options 			= {quality: 85}
 
 
 // SELF CREATED
-// const Logo 				= require('./Logo')
-const LogoOld 				= require('./LogoOld')
+var Logo 				= require('./Logo')
+// const LogoOld 				= require('./LogoOld')
 
 
 
@@ -155,8 +155,11 @@ app.post('/save', function (req, res) {
 				}
 
 				
-				let logo = new LogoOld(351, 340, "", "", uniqueID)
+				let logo = new Logo(351, 340, "", "", uniqueID)
 				logo.exportLogo()
+
+				delete require.cache[require.resolve('./Logo')]
+				Logo = require('./Logo')
 
 			}
 			res.end( JSON.stringify( response ) )
