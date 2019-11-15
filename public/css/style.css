@@ -29,9 +29,22 @@ body.ruler{
 		rgba(255, 0, 0, 0) 0.95cm,
 		rgba(255, 0, 0, 0.5) 0.95cm,
 		rgba(255, 0, 0, 0.5) 1cm
+	),repeating-linear-gradient(
+		90deg,
+		rgba(0, 255, 0, 0),
+		rgba(0, 255, 0, 0) 10.475cm,
+		rgba(0, 255, 0, 0.5) 10.475cm,
+		rgba(0, 255, 0, 0.5) 10.525cm,
+		rgba(0, 255, 0, 0) 10.525cm
+	),repeating-linear-gradient(
+		rgba(0, 255, 0, 0),
+		rgba(0, 255, 0, 0) 14.825cm,
+		rgba(0, 255, 0, 0.75) 14.825cm,
+		rgba(0, 255, 0, 0.75) 14.875cm,
+		rgba(0, 255, 0, 0) 14.875cm
 	);
 
-	background-size: 1cm 1cm;
+	background-size: 21cm 30cm;
 	/*background-position: -0.11cm -0.1cm;*/
 }
 
@@ -196,8 +209,8 @@ sup{
 
 .recto #page{
 	padding: 0.8cm;
-	font-size:7pt;
-	line-height: 8.4pt;
+	font-size:8pt;
+	line-height: 9.5pt;
 	font-weight: 600;
 	font-family: "NotoSans";
 }
@@ -217,8 +230,8 @@ sup{
 /* ------------- */
 
 #logo{
-	width: calc(50% - 0.8cm);
-	height: 3cm;
+	width: calc(50% - 1.2cm);
+	height: 9cm;
 	position: absolute;
 	top: 0.8cm;
 	left: 0.8cm;
@@ -232,7 +245,7 @@ sup{
 
 /* ------------- */
 #info{
-	margin-left: 50%;
+	margin-left: calc(50% + 0.4cm);
 	position: relative;
 	z-index: 3;
 	/*background: rgba(255,0,0,0.3);*/
@@ -276,22 +289,39 @@ sup{
 /* ------------- */
 #recit{
 	position: absolute;
-	bottom: 0;
-	left: 0;
+	bottom: 1cm;
+	left: 1cm;
 	margin: 0.8cm;
-	width: calc(50% - 0.8cm);
-	background: #000;
+	width: calc(100% - 2.6cm);
+	/*background: #000;*/
 	color:#FFF;
 	padding: 0.12cm;
 	z-index: 4;
+	font-family: "NotoSansCondensed";
+	font-weight: 800;
+}
+
+#recit p{
+	margin-bottom: 0;
 }
 
 #recit p.extrait{
-	font-size: 12pt;
-	line-height: 14pt;
+	font-size: 14pt;
+	line-height: 19pt;
+	/*line-height: 1.35em;*/
 	font-weight: 500;
-	margin-bottom: 8.4pt;
+	/*margin-bottom: 8.4pt;*/
+	margin-left: -1cm;
 }
+
+#recit p mark{
+	background: #000;
+	color: #FFF;
+	/*padding: 2px 0; */
+	box-shadow: 5px 0 0 #000, -5px 0 0 #000;
+}
+
+
 
 /* ------------- */
 

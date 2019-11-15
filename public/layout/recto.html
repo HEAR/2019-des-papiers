@@ -28,8 +28,8 @@
 		<div id="trame"></div>
 
 		<div id="recit">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quia dolorum molestias placeat rerum autem recusandae ratione, esse sed amet consequatur quisquam voluptatem est error ad quod magnam dolore facilis!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi odit ipsa nesciunt delectus explicabo, eaque, numquam facilis vitae consequatur placeat aperiam voluptatibus id. Hic eos, voluptate voluptates fuga quo autem.</p>
+			<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quia dolorum molestias placeat rerum autem recusandae ratione, esse sed amet consequatur quisquam voluptatem est error ad quod magnam dolore facilis!</span></p>
+			<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi odit ipsa nesciunt delectus explicabo, eaque, numquam facilis vitae consequatur placeat aperiam voluptatibus id. Hic eos, voluptate voluptates fuga quo autem.</span></p>
 		</div>
 	</div>
 
@@ -61,7 +61,7 @@
 				$(".nom").html(`${data.nom}<br>${data.prenom}`)
 				$("#logo")
 					.load(`../svg/${data.id}.svg`)
-					.css("transform", `scale(${1.5/*+Math.random()*/})`)
+					// .css("transform", `scale(${1.5/*+Math.random()*/})`)
 
 				let idArr = data.id.split(/[-_]+/)
 
@@ -181,7 +181,7 @@
 				extrait = choicer(recit.extraits)
 				
 				$("#recit").html(
-					`<p>Passage du récit de ${nom}</p><p class="extrait">${extrait}</p><p>${titre}</p><p>${fond}</p>`
+					`<p><mark>Passage du récit de ${nom}</mark></p><p class="extrait"><mark>${extrait}</mark></p><p><mark>${titre}</mark></p><p><mark>${fond}</mark></p>`
 				)
 
 			});

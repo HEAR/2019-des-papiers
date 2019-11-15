@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@svgdotjs/svg.js": "^3.0.16",
     "body-parser": "^1.19.0",
     "directory-scanner": "^1.1.0",
     "easy-pdf-merge": "^0.2.2",
